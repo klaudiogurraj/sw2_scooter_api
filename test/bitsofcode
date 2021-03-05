@@ -1,0 +1,18 @@
+func setUp() map[string]EScooter {
+
+	store := make(map[string]EScooter)
+
+	for x := 0; x < 31; x++ {
+
+		es := EScooter{
+			ID:    uuid.New().String()[0:5],
+			GPS:   *geo.NewPoint(rand.Float64()*100, rand.Float64()*100),
+			KM:    int64(rand.Intn(100000)),
+			AKKU:  int16(rand.Intn(101)),
+			STATE: true,
+		}
+
+		store[es.ID] = es
+	}
+	return store
+}

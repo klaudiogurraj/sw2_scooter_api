@@ -62,6 +62,7 @@ func (h *scootersHandlers) post(w http.ResponseWriter, r *http.Request) {
 	}
 	/*
 		//TODO maybe not neccesary
+		//check if request type is json
 		if r.Header.Get("Content-Type") != "application/json" {
 
 			w.WriteHeader(http.StatusUnsupportedMediaType)
@@ -81,10 +82,11 @@ func (h *scootersHandlers) post(w http.ResponseWriter, r *http.Request) {
 
 	s := h.store[scooter.ID]
 
-	//TODO check dereference of pointer by post request without gps field
+	//Assign old values to the scooter
 	if scooter.GPS == nil {
 		scooter.GPS = s.GPS
 	}
+
 	if scooter.AKKU == 0 {
 		scooter.AKKU = s.AKKU
 	}
@@ -121,6 +123,7 @@ func (h *scootersHandlers) get(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonBytes)
 
 }
+
 func (h *scootersHandlers) getScooter(w http.ResponseWriter, r *http.Request) {
 
 	url := strings.Split(r.URL.String(), "/")
@@ -134,6 +137,7 @@ func (h *scootersHandlers) getScooter(w http.ResponseWriter, r *http.Request) {
 	scooter, ok := h.store[url[2]]
 
 	h.Unlock()
+
 	if !ok {
 		w.WriteHeader(http.StatusNotFound)
 		return
@@ -153,8 +157,8 @@ func (h *scootersHandlers) getScooter(w http.ResponseWriter, r *http.Request) {
 
 func setUp(j []byte) map[string]EScooter {
 
+	// Unmarshal in an array of EScooter's
 	var fJSON []EScooter
-
 	e := json.Unmarshal(j, &fJSON)
 
 	if e != nil {
