@@ -1,0 +1,22 @@
+{
+  "summary": {
+    "title": "Test_Service",
+    "owner": "Iso_Team",
+    "description": "Manage Logging"
+  },
+  "detail": {
+    "contributors": [
+      {
+        "name": "me, myself, and I"
+      }
+    ],
+    "diagrams": [
+      {
+        "title": "Threat",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ],
+    "reviewer": "None"
+  }
+}
